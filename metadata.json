@@ -1,0 +1,5 @@
+{
+  "name": "Nexus Bíblico 5.0",
+  "description": "A futuristic interface to manage a personal collection of biblical verses, featuring AI-powered verse text fetching. Users can add, view, search, edit, and delete verses.",
+  "requestFramePermissions": []
+}
