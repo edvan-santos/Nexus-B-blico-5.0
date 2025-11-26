@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Header: React.FC = () => {
@@ -8,7 +7,7 @@ const Header: React.FC = () => {
         Nexus Bíblico 5.0
       </h1>
       <p className="text-sm text-gray-400 mt-1 font-sans">
-        Protocolo de Interface Futurista para Gerenciamento de Conhecimento Sagrado
+        Gerenciador de Versículos Bíblicos por Tema
       </p>
     </header>
   );
