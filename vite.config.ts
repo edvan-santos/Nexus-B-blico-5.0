@@ -1,3 +1,4 @@
+
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -7,9 +8,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // Define process.env como um objeto vazio para evitar "ReferenceError: process is not defined"
-      'process.env': {},
-      // Substitui especificamente a chave da API pelo valor da variável de ambiente
+      // Substitui apenas a chave da API. A definição global de process.env vazia foi removida
+      // para evitar conflitos, confiando no polyfill do index.html para o runtime.
       'process.env.API_KEY': JSON.stringify(env.API_KEY)
     }
   }
