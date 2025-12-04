@@ -2,7 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 
 export const fetchVerseText = async (reference: string, version: string = 'NVI'): Promise<string> => {
-  console.log("Gemini Service v5.1 initialized"); // Log para verificar atualização de versão
+  console.log("Gemini Service v5.2 initialized (Stable Model)"); // Log para verificar atualização de versão
   
   const apiKey = process.env.API_KEY;
 
@@ -20,7 +20,7 @@ export const fetchVerseText = async (reference: string, version: string = 'NVI')
     console.log(`Buscando versículo: ${reference}...`);
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-1.5-flash',
         contents: prompt
     });
 

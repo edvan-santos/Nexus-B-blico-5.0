@@ -9,7 +9,8 @@ export default defineConfig(({ mode }) => {
   
   // Tenta pegar a chave do loadEnv, do process.env (CI/CD), ou usa a chave fornecida (Hardcoded Fallback)
   // ATENÇÃO: Em produção comercial, evite hardcode de chaves. Use variáveis de ambiente do Vercel.
-  const apiKey = env.API_KEY || process.env.API_KEY || "AIzaSyCLbgF-4MIPgQcnegUNfd5_5vAeZlVIJSc";
+  const rawApiKey = env.API_KEY || process.env.API_KEY || "AIzaSyCLbgF-4MIPgQcnegUNfd5_5vAeZlVIJSc";
+  const apiKey = rawApiKey.trim();
 
   return {
     plugins: [react()],
