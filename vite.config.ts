@@ -4,13 +4,17 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  // Carrega variáveis do arquivo .env ou do ambiente
   const env = loadEnv(mode, (process as any).cwd(), '');
+  
+  // Tenta pegar a chave do loadEnv ou diretamente do process.env (comum em CI/CD)
+  const apiKey = env.API_KEY || process.env.API_KEY;
+
   return {
     plugins: [react()],
     define: {
-      // Substitui apenas a chave da API. A definição global de process.env vazia foi removida
-      // para evitar conflitos, confiando no polyfill do index.html para o runtime.
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
+      // Injeta a chave no código final. Se for undefined, ficará undefined (e o service tratará isso)
+      'process.env.API_KEY': JSON.stringify(apiKey)
     }
   }
 })
