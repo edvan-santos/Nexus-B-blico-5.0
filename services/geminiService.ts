@@ -2,7 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 
 export const fetchVerseText = async (reference: string, version: string = 'NVI'): Promise<string> => {
-  console.log("Gemini Service v5.2 initialized (Stable Model)"); // Log para verificar atualização de versão
+  console.log("Gemini Service v5.3 initialized (Official Model 2.5)"); // Log para verificar atualização de versão
   
   const apiKey = process.env.API_KEY;
 
@@ -20,7 +20,7 @@ export const fetchVerseText = async (reference: string, version: string = 'NVI')
     console.log(`Buscando versículo: ${reference}...`);
 
     const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.5-flash',
         contents: prompt
     });
 
@@ -38,7 +38,8 @@ export const fetchVerseText = async (reference: string, version: string = 'NVI')
     // Se o usuário ver essa mensagem na tela, saberemos exatamente o problema
     if (error instanceof Error) {
         // Erros comuns da API
-        if (error.message.includes("403")) return Promise.reject(new Error("Erro 403 (Acesso Negado): Sua API Key pode estar restrita a domínios incorretos ou não ter permissão."));
+        if (error.message.includes("403")) return Promise.reject(new Error("Erro 403 (Acesso Negado): Verifique se a API Key está correta e se o projeto no Google AI Studio tem acesso ao modelo gemini-2.5-flash."));
+        if (error.message.includes("404")) return Promise.reject(new Error("Erro 404 (Modelo não encontrado): O modelo solicitado não está disponível para esta chave."));
         if (error.message.includes("400")) return Promise.reject(new Error("Erro 400 (Requisição Inválida): A API rejeitou os dados enviados."));
         if (error.message.includes("429")) return Promise.reject(new Error("Erro 429 (Limite Excedido): Você atingiu o limite de requisições da API gratuita."));
         if (error.message.includes("API key")) return Promise.reject(new Error("Erro de API Key: A chave fornecida é inválida."));
